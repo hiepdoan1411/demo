@@ -1,9 +1,14 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import App from "./App";
+import { RecoilRoot } from "recoil";
 
-test("renders learn react link", () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
+test.each([/Micro/, /Amaz/, /Face/])("renders Items", (item) => {
+  render(
+    <RecoilRoot>
+      <App />
+    </RecoilRoot>
+  );
+  const linkElement = screen.getByText(new RegExp(item, "i"));
   expect(linkElement).toBeInTheDocument();
 });
